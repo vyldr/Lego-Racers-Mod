@@ -4,5 +4,5 @@
 cd "$(dirname "$0")/.." || exit 2
 
 echo "Start building with $(nproc) threads"
-make -C build -j$(nproc) config=debug_x86 all
+make -C build -j$(nproc) config=debug_x64 all
 

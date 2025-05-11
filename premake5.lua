@@ -17,15 +17,15 @@ workspace "LegoRacersMod"
         "MultiProcessorCompile"
     }
 
-    configurations { 
+    configurations {
         "Debug",
-        "Release" 
+        "Release"
     }
 
     platforms {
-        "x86"
+        "x64"
     }
-    defaultplatform "x86"
+    defaultplatform "x64"
 
     disablewarnings {
         "26812" -- Prefer enum class over unscoped
