@@ -120,7 +120,8 @@ private:
     bool WriteFileData(IJamFileWriterDataProvider& provider)
     {
         const auto fileDataStartOffset = sizeof(JAM_FILE_MAGIC) + (sizeof(uint32_t) + sizeof(uint32_t)) * m_directories.size()
-                                         + sizeof(DiskDirectoryEntry) * std::max(m_directories.size() - 1, 0u) + sizeof(DiskFileEntry) * m_files.size();
+                                         + sizeof(DiskDirectoryEntry) * std::max(m_directories.size() - 1, (unsigned long)0u)
+                                         + sizeof(DiskFileEntry) * m_files.size();
 
         m_stream.seekp(fileDataStartOffset, std::ios::beg);
 
@@ -196,7 +197,7 @@ private:
                 strncpy(diskDir.directoryName, subDir.m_name.c_str(), std::extent_v<decltype(DiskDirectoryEntry::directoryName)>);
 
                 const auto directoryDataBeforeMe = subDirectoryIndex;
-                const auto diskDirectoriesBeforeMe = std::max(subDir.m_sub_directory_start_index - 1, 0u);
+                const auto diskDirectoriesBeforeMe = std::max(subDir.m_sub_directory_start_index - 1, (unsigned long)0u);
                 const auto diskFilesBeforeMe = subDir.m_file_start_index;
 
                 diskDir.dataOffset = sizeof(JAM_FILE_MAGIC) + directoryDataBeforeMe * (sizeof(uint32_t) + sizeof(uint32_t))

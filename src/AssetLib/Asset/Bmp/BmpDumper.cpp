@@ -95,7 +95,7 @@ namespace bmp
             m_width = inHeader.width;
             m_height = inHeader.height;
 
-            m_out_stride_in_bytes = utils::Align(m_width * m_bits_per_pixel, 32u) / 8u;
+            m_out_stride_in_bytes = utils::Align(m_width * m_bits_per_pixel, (unsigned long)32u) / 8u;
             m_out_image_size_in_byte = m_out_stride_in_bytes * m_height;
 
             const auto hasPalette = m_bits_per_pixel <= 8 && (inHeader.bitsPerPixel & CUSTOM_BMP_FLAG_NO_PALETTE) == 0;
@@ -165,7 +165,7 @@ namespace bmp
 
         void WriteData()
         {
-            const auto scanLineDataLen = utils::Align(m_width * m_bits_per_pixel, 8u) / 8u;
+            const auto scanLineDataLen = utils::Align(m_width * m_bits_per_pixel, (unsigned long)8u) / 8u;
 
             const auto scanLineBuffer = std::make_unique<char[]>(scanLineDataLen * m_height);
             for (auto scanLineIndex = 0u; scanLineIndex < m_height; scanLineIndex++)
