@@ -47,7 +47,7 @@ bool ObjImporter::SupportsExtension(const std::string& extensionName) const
     return extensionName == ".OBJ";
 }
 
-bool ObjImporter::Convert(const std::string& directory, const std::string& filePath)
+bool ObjImporter::Convert(const std::string& directory, const std::string& filePath, const std::string& outDirectory)
 {
     const fs::path fsPath = fs::path(directory) / filePath;
     if (!fs::is_regular_file(fsPath))

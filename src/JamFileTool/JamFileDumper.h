@@ -3,5 +3,5 @@
 
 namespace dumping
 {
-    void DumpJamFile(const std::string& filePath);
+    void DumpJamFile(const std::string& filePath, const std::string& outDirPath);
 }

@@ -8,6 +8,6 @@ namespace obj
     {
     public:
         [[nodiscard]] bool SupportsExtension(const std::string& extensionName) const override;
-        bool Convert(const std::string& directory, const std::string& filePath) override;
+        bool Convert(const std::string& directory, const std::string& filePath, const std::string& outDirectory) override;
     };
 } // namespace obj
