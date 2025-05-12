@@ -476,7 +476,7 @@ bool ObjExporter::SupportsExtension(const std::string& extensionName) const
     return extensionName == ".GDB";
 }
 
-bool ObjExporter::Convert(const std::string& directory, const std::string& filePath)
+bool ObjExporter::Convert(const std::string& directory, const std::string& filePath, const std::string& outDirectory)
 {
     const fs::path fsPath = fs::path(directory) / filePath;
     if (!fs::is_regular_file(fsPath))
@@ -511,7 +511,7 @@ bool ObjExporter::Convert(const std::string& directory, const std::string& fileP
     writer.ExportColors(model.m_vertex_format == gdb::VertexFormat::POSITION_UV_COLOR);
     writer.ExportNormals(model.m_vertex_format == gdb::VertexFormat::POSITION_UV_NORMAL);
 
-    if (!WriteObjFile(writer, directory, fileName) || !WriteMatFile(writer, directory, fileName))
+    if (!WriteObjFile(writer, outDirectory, fileName) || !WriteMatFile(writer, outDirectory, fileName))
         return false;
 
     return true;

@@ -9,28 +9,33 @@ namespace fs = std::filesystem;
 
 int main(const int argc, const char** argv)
 {
-    for (auto i = 1; i < argc; i++)
+    // Make sure we got two args
+    if (argc != 3)
     {
-        fs::path targetPath(argv[i]);
-        if (!fs::exists(targetPath))
-        {
-            std::cout << "Invalid file or directory \"" << targetPath << "\"\n";
-            continue;
-        }
-
-        if (fs::is_directory(targetPath))
-        {
-            creating::CreateJamFile(targetPath.string());
-        }
-        else if (fs::is_regular_file(targetPath))
-        {
-            dumping::DumpJamFile(targetPath.string());
-        }
-        else
-        {
-            std::cout << "Unknown filesystem element type for \"" << targetPath << "\"\n";
-        }
+        std::cout << "Invalid input. \nUsage: JamFileTool INPUT.JAM output_directory\n";
+        return 1;
     }
+
+    // Get the JAM file and the output directory
+    fs::path jamPath(argv[1]);
+    fs::path outDir(argv[2]);
+
+    // Check if JAM exists
+    if (!fs::exists(jamPath) || !fs::is_regular_file(jamPath))
+    {
+        std::cout << "Invalid JAM file \"" << jamPath << "\"\n";
+        return 1;
+    }
+
+    // Check if output directory exists
+    if (!fs::exists(outDir) || !fs::is_directory(outDir))
+    {
+        std::cout << "Invalid output directory \"" << outDir << "\"\n";
+        return 1;
+    }
+
+    // Dump the JAM
+    dumping::DumpJamFile(jamPath.string(), outDir.string());
 
     return 0;
 }

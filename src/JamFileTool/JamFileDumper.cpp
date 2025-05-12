@@ -213,7 +213,7 @@ private:
     fs::path m_dump_folder;
 };
 
-void dumping::DumpJamFile(const std::string& filePath)
+void dumping::DumpJamFile(const std::string& filePath, const std::string& outDirPath)
 {
     std::ifstream stream(filePath, std::ios::in | std::ios::binary);
     if (!stream.is_open())
@@ -222,8 +222,9 @@ void dumping::DumpJamFile(const std::string& filePath)
         return;
     }
 
-    const fs::path path(filePath);
-    const auto dumpFolder = path.parent_path() / path.filename().replace_extension();
+    const fs::path jamFilePath(filePath);
+    const fs::path path(outDirPath);
+    const auto dumpFolder = path.parent_path() / jamFilePath.filename().replace_extension();
     fs::create_directories(dumpFolder);
 
     std::cout << "Dumping JAM file \"" << filePath << "\""
